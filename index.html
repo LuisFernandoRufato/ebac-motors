@@ -156,9 +156,56 @@
             </ul>
         </div>
     </section>
+    <section>
+        <div class="container">
+            <h2>Entre em contato</h2>
+            <form>
+                <div class="form-campo">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome">
+                </div>
+                <div class="form-campo">
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" id="telefone" name="telefone">
+                </div>
+                <div class="form-campo">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-campo">
+                    <label for="veiculo-de-interesse">Veiculo de interesse:</label>
+                    <input type="text" id="veiculo-de-interesse" name="veiculoDeInteresse">
+                </div>
+                <div class="form-campo">
+                    <label for="mensagem">Mensagem:</label>
+                    <textarea id="mensagem" name="mensagem"></textarea>
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <div class="container container-flex">
+            <p>2024 &copy; EBAC Motors - Todos os direitos reservados (EBAC)</p>
+            <ul class="container-flex">
+                <li>
+                    <a href="#"><img src="./icones/facebook.png" alt="Logo Facebook"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="./icones/instagram.png" alt="Logo Instagram"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="./icones/youtube.png" alt="Logo YouTube"></a>
+                </li>
+            </ul>
+        </div>
+    </footer>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="./js/jquery.mask.min.js"></script>
+    <script src="./js/jquery.validate.min.js"></script>
+    <script src="./js/messages_pt_BR.min.js"></script>
     <script>
         $(document).ready(function(){
             $('#carousel-imagens').slick({
@@ -168,6 +215,41 @@
 
             $('.menu-hamburguer').click(function(){
                 $('nav').slideToggle();
+            });
+
+            $('#telefone').mask("(00) 00000-0000");
+
+            $('form').validate({
+                rules: {
+                    nome: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    telefone: {
+                        required: true
+                    },
+                    veiculoDeInteresse: {
+                        required: false
+                    },
+                    mensagem: {
+                        required: true
+                    }
+                },
+                messages: {
+                    nome: 'Por favor, insira seu nome'
+                },
+                submitHandler: function(form){
+                    console.log(fomr)
+                },
+                invalidHandler: function(evento, validador){
+                    let camposIncorretos = validador.numberOfInvalids();
+                    if (camposIncorretos){
+                        alert(`Existem ${camposIncorretos} campos incorretos`)
+                    }
+                }
             });
         });
     </script>
